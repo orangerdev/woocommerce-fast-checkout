@@ -3,6 +3,7 @@
 		display: block;
 		position: relative;
 		cursor: pointer;
+		margin-bottom: 1rem;
 
 		.description {
 			padding: 1rem;
@@ -11,10 +12,17 @@
 			border-radius: 0.5rem;
 
 			.name {
-				margin: 0;
 				line-height: 1;
 				font-size: 18px;
 				padding-left: 2rem;
+			}
+
+			> * {
+				margin: 0 0 1rem 0;
+			}
+
+			:last-child {
+				margin-bottom: 0;
 			}
 		}
 

@@ -21,6 +21,7 @@
   display: block;
   position: relative;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 .woofastcheck-select-product label .description {
   padding: 1rem;
@@ -29,10 +30,15 @@
   border-radius: 0.5rem;
 }
 .woofastcheck-select-product label .description .name {
-  margin: 0;
   line-height: 1;
   font-size: 18px;
   padding-left: 2rem;
+}
+.woofastcheck-select-product label .description > * {
+  margin: 0 0 1rem 0;
+}
+.woofastcheck-select-product label .description :last-child {
+  margin-bottom: 0;
 }
 .woofastcheck-select-product label input {
   display: none;
@@ -59,12 +65,42 @@
   text-align: right;
 }
 
-.woofastcheck-checkout-form {
-  display: none;
-}
 .woofastcheck-checkout-form .col2-set {
   float: none !important;
   width: 100% !important;
+}
+.woofastcheck-checkout-form .woocommerce-checkout {
+  width: 100%;
+}
+.woofastcheck-checkout-form .woocommerce-checkout h3 {
+  margin: 0 0 1rem 0;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .hidden {
+  display: none !important;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .shop_table.woocommerce-checkout-review-order-table {
+  margin-top: 0;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-billing-fields__field-wrapper {
+  margin-top: 0;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper input {
+  float: left;
+  clear: left;
+  margin-top: 4px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper label {
+  float: left;
+  clear: right;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper select {
+  padding: 0.9em 1.1rem;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .wc_payment_methods label {
+  cursor: pointer;
 }
 .woofastcheck-checkout-form .button-holder {
   margin-bottom: 1rem;

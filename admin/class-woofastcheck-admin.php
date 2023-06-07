@@ -47,6 +47,22 @@ class Admin
   private $version;
 
   /**
+   * Payment channels
+   * @since   1.0.0
+   * @access  protected
+   * @var     array
+   */
+  protected $payment_channels = [];
+
+  /**
+   * Variable for main options
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @var     Carbon_Fields\Container
+   */
+  protected $main_options;
+
+  /**
    * Initialize the class and set its properties.
    *
    * @since    1.0.0
@@ -73,6 +89,24 @@ class Admin
   }
 
   /**
+   * Set payment channel options for the theme options
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @return  array
+   */
+  public function set_payment_channels()
+  {
+    if (is_array($this->payment_channels) && count($this->payment_channels) === 0) :
+      $gateways = \WC()->payment_gateways->get_available_payment_gateways();
+      foreach ((array) $gateways as $key => $gateway) :
+        $this->payment_channels[$key] = $gateway->title;
+      endforeach;
+    endif;
+
+    return $this->payment_channels;
+  }
+
+  /**
    * Register carbonfields setting
    * @uses    carbon_fields_register_fields, priority 10
    * @author  Ridwan Arifandi
@@ -81,6 +115,30 @@ class Admin
    */
   public function register_setting()
   {
+    $this->main_options = Container::make('theme_options', __('eCom Config', 'docquity'))
+      ->add_tab(__('Payment Fee Setup', 'docquity'), [
+
+        Field::make('complex', 'payment', __('Payment Channel', 'docquity'))
+          ->add_fields([
+            Field::make('select', 'channel', 'Channel')
+              ->set_options([$this, 'set_payment_channels'])
+              ->set_required(true)
+              ->set_width(50),
+            Field::make('text', 'fee', 'Fee')
+              ->set_attribute('type', 'number')
+              ->set_required(true)
+              ->set_width(30),
+            Field::make('select', 'fee_type', 'Fee Type')
+              ->add_options([
+                'percent' => 'Percent',
+                'flat' => 'Flat'
+              ])
+              ->set_width(20)
+          ])
+          ->set_layout('tabbed-vertical')
+          ->set_header_template('<% if(channel) { %><%= channel %> <% } %>'),
+      ]);
+
     /**
      * Registering setting for page
      */
@@ -99,12 +157,27 @@ class Admin
     /**
      * Registering setting for product
      */
+
+    $fields = [
+      Field::make("checkbox", "only_one_in_cart", "Make sure only one product in cart")
+        ->set_option_value("yes"),
+      Field::make('checkbox', "enable_custom_payment_gateway", "Overwrite Payment Gateway")
+        ->set_option_value("yes"),
+      Field::make('multiselect', 'available_payment_gateway', __('Available Payment Gateway', 'dcm_phil'))
+        ->add_options([$this, 'set_payment_channels'])
+        ->set_conditional_logic(array(
+          'relation' => 'AND',
+          [
+            'field' => 'enable_custom_payment_gateway',
+            'value' => true
+          ]
+        ))
+    ];
+
     Container::make('post_meta', __('Configuration', 'woofastcheck'))
       ->where('post_type', '=', CPT_PRODUCT)
-      ->add_fields([
-        Field::make("checkbox", "only_one_in_cart", "Make sure only one product in cart")
-          ->set_option_value("yes")
-          ->set_default_value("")
-      ]);
+      ->add_fields(
+        apply_filters("woofastcheck/product/settings", $fields)
+      );
   }
 }
