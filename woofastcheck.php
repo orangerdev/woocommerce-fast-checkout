@@ -26,8 +26,8 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+  die;
 }
 
 /**
@@ -35,34 +35,43 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WOOFASTCHECK_VERSION', '1.0.0' );
+define('WOOFASTCHECK_VERSION', '1.0.0');
+define('WOOFASTCHECK_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('WOOFASTCHECK_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+define("CPT_PAGE", "page");
+define('CPT_PRODUCT', "product");
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-woofastcheck-activator.php
  */
-function activate_woofastcheck() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woofastcheck-activator.php';
-	Woofastcheck_Activator::activate();
+function activate_woofastcheck()
+{
+  require_once plugin_dir_path(__FILE__) . 'includes/class-woofastcheck-activator.php';
+  Woofastcheck_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-woofastcheck-deactivator.php
  */
-function deactivate_woofastcheck() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woofastcheck-deactivator.php';
-	Woofastcheck_Deactivator::deactivate();
+function deactivate_woofastcheck()
+{
+  require_once plugin_dir_path(__FILE__) . 'includes/class-woofastcheck-deactivator.php';
+  Woofastcheck_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_woofastcheck' );
-register_deactivation_hook( __FILE__, 'deactivate_woofastcheck' );
+register_activation_hook(__FILE__, 'activate_woofastcheck');
+register_deactivation_hook(__FILE__, 'deactivate_woofastcheck');
+
+require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-woofastcheck.php';
+require plugin_dir_path(__FILE__) . 'includes/class-woofastcheck.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +82,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-woofastcheck.php';
  *
  * @since    1.0.0
  */
-function run_woofastcheck() {
+function run_woofastcheck()
+{
 
-	$plugin = new Woofastcheck();
-	$plugin->run();
-
+  $plugin = new Woofastcheck();
+  $plugin->run();
 }
 run_woofastcheck();
