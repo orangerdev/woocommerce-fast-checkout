@@ -173,9 +173,13 @@ class Woofastcheck
     $public = new Woofastcheck\Front($this->get_plugin_name(), $this->get_version());
 
     $this->loader->add_action('init', $public, 'register_shortcode');
+
+    $this->loader->add_action('woocommerce_ajax_added_to_cart', $public, 'remove_other_items');
     $this->loader->add_action('template_redirect', $public, 'add_to_cart');
+
     $this->loader->add_action('wp_enqueue_scripts', $public, 'enqueue_scripts');
     $this->loader->add_action('wp_enqueue_scripts', $public, 'enqueue_styles');
+
     $this->loader->add_filter('body_class', $public, 'add_body_class');
   }
 

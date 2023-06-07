@@ -1,32 +1,41 @@
-(function( $ ) {
-	'use strict';
+(function ($) {
+	"use strict";
 
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+	$(document).ready(function () {
+		$("body").on("change", ".woofastcheck-select-product input", function () {
+			const value = $(this).val();
+			$.ajax({
+				url: woofastcheck.addtocart.url,
+				type: "POST",
+				data: {
+					"wc-ajax": "add_to_cart",
+					product_id: value,
+					product_sku: $(this).data("sku"),
+					quantity: 1,
+				},
+				success: function (data) {
+					if (data && data.fragments) {
+						// Replace fragments
+						$.each(data.fragments, function (key, value) {
+							$(key).replaceWith(value);
+						});
 
-})( jQuery );
+						// Trigger event so themes can refresh other areas.
+						$(document.body).trigger("wc_fragments_loaded");
+						$(document.body).trigger("update_checkout");
+					}
+				},
+			});
+		});
+
+		$("body").on("click", ".woofastcheck-next-checkout-button", function () {
+			$(".woofastcheck-select-product").hide();
+			$(".woofastcheck-checkout-form").fadeIn("fast");
+		});
+
+		$("body").on("click", ".woofastcheck-back-product-button", function () {
+			$(".woofastcheck-select-product").fadeIn("fast");
+			$(".woofastcheck-checkout-form").hide("fast");
+		});
+	});
+})(jQuery);

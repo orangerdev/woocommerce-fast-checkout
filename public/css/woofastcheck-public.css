@@ -1,4 +1,71 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+.woofastcheck-holder {
+  width: 640px;
+  max-width: 80vw;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.woofastcheck-holder .button-nav {
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: var(--wp--preset--color--vivid-cyan-blue);
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--wp--preset--color--base);
+}
+
+.woofastcheck-select-product label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+.woofastcheck-select-product label .description {
+  padding: 1rem;
+  display: block;
+  text-align: justify;
+  border-radius: 0.5rem;
+}
+.woofastcheck-select-product label .description .name {
+  margin: 0;
+  line-height: 1;
+  font-size: 18px;
+  padding-left: 2rem;
+}
+.woofastcheck-select-product label input {
+  display: none;
+}
+.woofastcheck-select-product label:hover .description {
+  background-color: var(--wc-secondary);
+}
+.woofastcheck-select-product label input + .description:before {
+  position: absolute;
+  display: block;
+  font-family: FontAwesome;
+  content: "\f10c";
+  font-size: 1.5rem;
+  top: 5px;
+  left: 1rem;
+}
+.woofastcheck-select-product label input:checked + .description {
+  background-color: var(--wp--preset--color--pale-cyan-blue);
+}
+.woofastcheck-select-product label input:checked + .description:before {
+  content: "\f05d";
+}
+.woofastcheck-select-product .button-holder {
+  text-align: right;
+}
+
+.woofastcheck-checkout-form {
+  display: none;
+}
+.woofastcheck-checkout-form .col2-set {
+  float: none !important;
+  width: 100% !important;
+}
+.woofastcheck-checkout-form .button-holder {
+  margin-bottom: 1rem;
+}

@@ -81,6 +81,9 @@ class Admin
    */
   public function register_setting()
   {
+    /**
+     * Registering setting for page
+     */
     Container::make('post_meta', __('Configuration', 'woofastcheck'))
       ->where('post_type', '=', CPT_PAGE)
       ->add_fields([
@@ -91,6 +94,17 @@ class Admin
               'post_type' => CPT_PRODUCT
             ]
           ])
+      ]);
+
+    /**
+     * Registering setting for product
+     */
+    Container::make('post_meta', __('Configuration', 'woofastcheck'))
+      ->where('post_type', '=', CPT_PRODUCT)
+      ->add_fields([
+        Field::make("checkbox", "only_one_in_cart", "Make sure only one product in cart")
+          ->set_option_value("yes")
+          ->set_default_value("")
       ]);
   }
 }

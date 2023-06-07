@@ -1,0 +1,51 @@
+.woofastcheck-select-product {
+	label {
+		display: block;
+		position: relative;
+		cursor: pointer;
+
+		.description {
+			padding: 1rem;
+			display: block;
+			text-align: justify;
+			border-radius: 0.5rem;
+
+			.name {
+				margin: 0;
+				line-height: 1;
+				font-size: 18px;
+				padding-left: 2rem;
+			}
+		}
+
+		input {
+			display: none;
+		}
+
+		&:hover .description {
+			background-color: var(--wc-secondary);
+		}
+
+		input + .description:before {
+			position: absolute;
+			display: block;
+			font-family: FontAwesome;
+			content: "\f10c";
+			font-size: 1.5rem;
+			top: 5px;
+			left: 1rem;
+		}
+
+		input:checked + .description {
+			background-color: var(--wp--preset--color--pale-cyan-blue);
+
+			&:before {
+				content: "\f05d";
+			}
+		}
+	}
+
+	.button-holder {
+		text-align: right;
+	}
+}

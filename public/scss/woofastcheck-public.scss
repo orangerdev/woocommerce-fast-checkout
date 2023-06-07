@@ -1,0 +1,23 @@
+.woofastcheck-holder {
+	width: 640px;
+	max-width: 80vw;
+	margin: 0 auto;
+
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	padding: 1rem;
+
+	.button-nav {
+		cursor: pointer;
+		display: inline-block;
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		background-color: var(--wp--preset--color--vivid-cyan-blue);
+		border: none;
+		border-radius: 0.25rem;
+		color: var(--wp--preset--color--base);
+	}
+}
+
+@import "modules/select";
+@import "modules/checkout";

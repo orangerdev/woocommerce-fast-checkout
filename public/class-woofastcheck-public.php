@@ -2,6 +2,8 @@
 
 namespace Woofastcheck;
 
+use function PHPSTORM_META\map;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -91,11 +93,26 @@ class Front
    */
   public function enqueue_styles()
   {
-
-    wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/woofastcheck-public.css', array(), $this->version, 'all');
-
     if ($this->has_shortcode) :
-      wp_enqueue_style("select2");
+
+      wp_register_style(
+        'fontawesome',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+        [],
+        '4.7.0',
+        'all'
+      );
+
+      wp_enqueue_style(
+        $this->plugin_name,
+        plugin_dir_url(__FILE__) . 'css/woofastcheck-public.css',
+        array(
+          'select2',
+          'fontawesome'
+        ),
+        $this->version,
+        'all'
+      );
     endif;
   }
 
@@ -106,13 +123,35 @@ class Front
    */
   public function enqueue_scripts()
   {
-
-    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woofastcheck-public.js', array('jquery'), $this->version, false);
-
     if ($this->has_shortcode) :
-      wp_enqueue_script('selectWoo');
-      wp_enqueue_script('wc-checkout');
-      wp_enqueue_script('wc-country-select');
+      wp_enqueue_script(
+        $this->plugin_name,
+        plugin_dir_url(__FILE__) . 'js/woofastcheck-public.js',
+        array(
+          'jquery',
+          'selectWoo',
+          'wc-checkout',
+          'wc-country-select'
+        ),
+        $this->version,
+        true
+      );
+
+      wp_localize_script(
+        $this->plugin_name,
+        'woofastcheck',
+        array(
+          'addtocart' => [
+            'url' => add_query_arg(
+              array(
+                'wc-ajax' => 'add_to_cart',
+              ),
+              home_url('/')
+            ),
+          ],
+          'nonce' => wp_create_nonce('woofastcheck-nonce'),
+        )
+      );
     endif;
   }
 
@@ -144,6 +183,24 @@ class Front
       $this->shortcode,
       array($this, 'display_shortcode')
     );
+  }
+
+  /**
+   * Remove other items in cart if only_this_product is true
+   * @uses    woocommerce_ajax_added_to_cart, priority 10
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @return  void
+   */
+  public function remove_other_items($product_id)
+  {
+    $only_this_product = carbon_get_post_meta($product_id, "only_one_in_cart");
+
+    if (!$only_this_product)
+      return;
+
+    \WC()->cart->empty_cart();
+    \WC()->cart->add_to_cart($product_id, 1);
   }
 
   /**
@@ -195,8 +252,6 @@ class Front
       ob_start();
 
       require_once WOOFASTCHECK_PLUGIN_DIR . 'public/partials/shortcode/display.php';
-
-      echo do_shortcode("[woocommerce_checkout]");
 
       $content .= ob_get_clean();
 
