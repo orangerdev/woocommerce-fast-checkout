@@ -1,11 +1,16 @@
 .woofastcheck-holder {
 	width: 640px;
-	max-width: 80vw;
-	margin: 0 auto;
+	max-width: calc(100% - var(--wp--style--root--padding-left)) !important;
+	margin: 0;
 
 	border: 1px solid #ccc;
 	border-radius: 8px;
 	padding: 1rem;
+
+	@media screen and (max-width: 640px) {
+		border-radius: 4px;
+		padding: 0.5rem;
+	}
 
 	.button-nav {
 		cursor: pointer;
@@ -16,6 +21,12 @@
 		border: none;
 		border-radius: 0.25rem;
 		color: var(--wp--preset--color--base);
+
+		@media screen and (max-width: 640) {
+			padding: 0.5rem 1rem;
+			font-size: 0.5rem;
+			border-radius: 0.125rem;
+		}
 	}
 }
 

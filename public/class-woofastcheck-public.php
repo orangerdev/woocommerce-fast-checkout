@@ -259,4 +259,75 @@ class Front
 
     return $content;
   }
+
+  /**
+   * Modify checkout fields
+   * @uses    woocommerce_checkout_fields, priority 10
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @param   array  $fields  Checkout fields
+   * @return  array           Modified checkout fields
+   */
+  public function modify_checkout_fields(array $fields)
+  {
+
+    $fields['billing']['selected_payment_gateway'] = array(
+      'type' => 'hidden',
+      'default' => '',
+    );
+
+    return $fields;
+  }
+
+  /**
+   * Modify template part location
+   * @uses    wc_get_template_part, priority 10, 3
+   * @param   string  $template  Template part location
+   * @param   string  $slug      Template part slug
+   * @param   string  $name      Template part name
+   * @return  string             Modified template part location
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   */
+  public function get_template_part($template, $template_name)
+  {
+
+    if ('checkout/payment.php' === $template_name) :
+      $template = WOOFASTCHECK_PLUGIN_DIR . 'public/partials/checkout/payment.php';
+    endif;
+
+    return $template;
+  }
+
+  /**
+   * Add convenience fee based on selected payment gateway
+   * @uses    woocommerce_cart_calculate_fees, priority 999
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @return  void
+   */
+  public function add_convenience_fee($cart)
+  {
+    $chosen_payment_id = \WC()->session->get('chosen_payment_method');
+
+    if (empty($chosen_payment_id))
+      return;
+
+    $payments = carbon_get_theme_option('payment');
+
+    if (is_array($payments) && count($payments) > 0) :
+      foreach ((array) $payments as $payment) :
+        if ($payment['channel'] === $chosen_payment_id) :
+          $fee = floatval($payment['fee']);
+
+          if ("percent" === $payment['fee_type']) :
+            $fee = $cart->subtotal * $fee / 100;
+          endif;
+
+          $cart->add_fee('Transaction Fee', $fee, true);
+          break;
+        endif;
+      endforeach;
+    endif;
+  }
 }

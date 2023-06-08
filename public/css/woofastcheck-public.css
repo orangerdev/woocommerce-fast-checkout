@@ -1,10 +1,16 @@
 .woofastcheck-holder {
   width: 640px;
-  max-width: 80vw;
-  margin: 0 auto;
+  max-width: calc(100% - var(--wp--style--root--padding-left)) !important;
+  margin: 0;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-holder {
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
 }
 .woofastcheck-holder .button-nav {
   cursor: pointer;
@@ -16,6 +22,13 @@
   border-radius: 0.25rem;
   color: var(--wp--preset--color--base);
 }
+@media screen and (max-width: 640) {
+  .woofastcheck-holder .button-nav {
+    padding: 0.5rem 1rem;
+    font-size: 0.5rem;
+    border-radius: 0.125rem;
+  }
+}
 
 .woofastcheck-select-product label {
   display: block;
@@ -23,19 +36,42 @@
   cursor: pointer;
   margin-bottom: 1rem;
 }
+@media screen and (max-width: 640px) {
+  .woofastcheck-select-product label {
+    margin-bottom: 0.5rem;
+  }
+}
 .woofastcheck-select-product label .description {
   padding: 1rem;
   display: block;
   text-align: justify;
   border-radius: 0.5rem;
 }
+@media screen and (max-width: 640px) {
+  .woofastcheck-select-product label .description {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 14px;
+  }
+}
 .woofastcheck-select-product label .description .name {
   line-height: 1;
   font-size: 18px;
   padding-left: 2rem;
 }
+@media screen and (max-width: 640px) {
+  .woofastcheck-select-product label .description .name {
+    font-size: 14px;
+    padding-left: 1rem;
+  }
+}
 .woofastcheck-select-product label .description > * {
   margin: 0 0 1rem 0;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-select-product label .description > * {
+    margin-bottom: 0.5rem;
+  }
 }
 .woofastcheck-select-product label .description :last-child {
   margin-bottom: 0;
@@ -54,6 +90,13 @@
   font-size: 1.5rem;
   top: 5px;
   left: 1rem;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-select-product label input + .description:before {
+    font-size: 1rem;
+    top: 2.5px;
+    left: 0.5rem;
+  }
 }
 .woofastcheck-select-product label input:checked + .description {
   background-color: var(--wp--preset--color--pale-cyan-blue);
@@ -75,6 +118,12 @@
 .woofastcheck-checkout-form .woocommerce-checkout h3 {
   margin: 0 0 1rem 0;
 }
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout h3 {
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+  }
+}
 .woofastcheck-checkout-form .woocommerce-checkout .hidden {
   display: none !important;
 }
@@ -84,24 +133,84 @@
 .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-billing-fields__field-wrapper {
   margin-top: 0;
 }
-.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper input {
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout .form-row > label {
+    font-size: 14px;
+  }
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=text],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=email],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=tel],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=number],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select {
+  border-radius: 4px;
+  border-width: 1px;
+  padding: 0.9em 1.1rem;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=text],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=email],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=tel],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=number],
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select {
+    padding: 0.9em 0.55rem;
+  }
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=radio] {
   float: left;
   clear: left;
-  margin-top: 4px;
+  margin-top: 5px;
+  width: 16px;
 }
-.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper label {
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=radio] + label {
   float: left;
   clear: right;
   cursor: pointer;
   font-size: 14px;
   margin-bottom: 2px;
+  width: calc(100% - 32px);
 }
-.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper select {
-  padding: 0.9em 1.1rem;
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper label.checkbox {
+  position: relative;
+  font-size: 14px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 2px;
+  width: calc(100% - 32px);
+  padding-left: 24px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper label.checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper label.checkbox {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-checkout-review-order {
+    font-size: 14px;
+  }
+  .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-checkout-review-order td,
+.woofastcheck-checkout-form .woocommerce-checkout .woocommerce-checkout-review-order th {
+    padding: 0.5rem 0.5rem 0.5rem 0 !important;
+  }
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-checkout-payment {
+    margin-top: 2rem !important;
+  }
 }
 .woofastcheck-checkout-form .woocommerce-checkout .wc_payment_methods label {
   cursor: pointer;
 }
 .woofastcheck-checkout-form .button-holder {
   margin-bottom: 1rem;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .button-holder {
+    margin-bottom: 0.5rem;
+  }
 }

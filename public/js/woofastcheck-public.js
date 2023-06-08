@@ -5,10 +5,12 @@
 		$(".woofastcheck-select-product")
 			.find("input:checked")
 			.each(function () {
+				$("#selected_payment_gateway").val($(this).data("pgs"));
+
+				return;
 				const available_pgs = $(this).data("pgs").split(",");
 
 				if (available_pgs.length === 1 && available_pgs[0] === "") {
-					console.log({ available_pgs });
 					$(".wc_payment_method").each(function () {
 						$(this).show();
 					});
@@ -25,7 +27,6 @@
 				$(".wc_payment_methods")
 					.find("li.wc_payment_method")
 					.each(function () {
-						console.log(this);
 						$(this).hide();
 					});
 
@@ -61,14 +62,13 @@
 						$.each(data.fragments, function (key, value) {
 							$(key).replaceWith(value);
 						});
-
-						// Trigger event so themes can refresh other areas.
-						$(document.body).trigger("wc_fragments_loaded");
-						$(document.body).trigger("update_checkout");
+						checkAvailablePGS();
 
 						setTimeout(function () {
-							checkAvailablePGS();
-						}, 500);
+							// Trigger event so themes can refresh other areas.
+							$(document.body).trigger("wc_fragments_loaded");
+							$(document.body).trigger("update_checkout");
+						}, 200);
 					}
 				},
 			});
@@ -78,14 +78,6 @@
 			$(document.body).trigger("update_checkout");
 		});
 
-		// $("body").on("click", ".woofastcheck-next-checkout-button", function () {
-		// 	$(".woofastcheck-select-product").hide();
-		// 	$(".woofastcheck-checkout-form").fadeIn("fast");
-		// });
-
-		// $("body").on("click", ".woofastcheck-back-product-button", function () {
-		// 	$(".woofastcheck-select-product").fadeIn("fast");
-		// 	$(".woofastcheck-checkout-form").hide("fast");
-		// });
+		$(document.body).trigger("update_checkout");
 	});
 })(jQuery);
