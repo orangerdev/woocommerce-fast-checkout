@@ -261,6 +261,27 @@ class Front
   }
 
   /**
+   * Get post data from update review order and checkout process
+   * @uses    woofastcheck/checkout/postdata, priority 10, 1
+   * @author  Ridwan Arifandi;
+   * @since   1.0.0
+   * @param   array  $post_data  Post data
+   * @return  array              Modified post data
+   */
+  public function get_post_data($post = array())
+  {
+    $post_data = array();
+
+    if (isset($post['post_data'])) :
+      wp_parse_str($post['post_data'], $post_data);
+    else :
+      $post_data = $_POST;
+    endif;
+
+    return $post_data;
+  }
+
+  /**
    * Modify checkout fields
    * @uses    woocommerce_checkout_fields, priority 10
    * @author  Ridwan Arifandi
