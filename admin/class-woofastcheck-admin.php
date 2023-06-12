@@ -180,4 +180,18 @@ class Admin
         apply_filters("woofastcheck/product/settings", $fields)
       );
   }
+
+  /**
+   * Exclude dir folder from updraft backup
+   * @uses    updraftplus_exclude_directory, priority 10
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @param   bool $filter
+   * @param   string $dir
+   * @return  bool
+   */
+  public function exclude_directory($filter, $dir)
+  {
+    return (basename($dir) === '.git') ? true : $filter;
+  }
 }

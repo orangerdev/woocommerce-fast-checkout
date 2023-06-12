@@ -1,15 +1,43 @@
+body.woofastcheck {
+	font-family: "Manrope", sans-serif;
+	font-weight: 500;
+}
+
 .woofastcheck-holder {
 	width: 640px;
 	max-width: calc(100% - var(--wp--style--root--padding-left)) !important;
-	margin: 0;
+	margin: 0 auto;
 
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	padding: 1rem;
+	// border: 1px solid #ccc;
+	// border-radius: 8px;
+	// padding: 1rem;
+
+	// @media screen and (max-width: 640px) {
+	// 	border-radius: 4px;
+	// 	padding: 0.5rem;
+	// }
+
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: -0.3%;
 
 	@media screen and (max-width: 640px) {
-		border-radius: 4px;
-		padding: 0.5rem;
+		letter-spacing: 0;
+	}
+
+	h2 {
+		font-family: "Lexend Deca", sans-serif;
+		font-weight: 500;
+		font-size: 32px;
+		line-height: 40px;
+		letter-spacing: -1.7%;
+		margin: 0 0 10px 0;
+
+		@media screen and (max-width: 640px) {
+			font-size: 24px;
+			line-height: 36px;
+			letter-spacing: -1px;
+		}
 	}
 
 	.button-nav {
@@ -26,6 +54,24 @@
 			padding: 0.5rem 1rem;
 			font-size: 0.5rem;
 			border-radius: 0.125rem;
+		}
+	}
+
+	button[type="submit"] {
+		background-color: #1d1919;
+		box-shadow: 0px 1px 8px 0px #00000014;
+		color: white;
+		border-radius: 8px;
+		line-height: 12px;
+		padding: 10px 32px;
+		float: none;
+
+		&:hover {
+			background: #444242;
+		}
+
+		&:active {
+			background: #737171;
 		}
 	}
 }

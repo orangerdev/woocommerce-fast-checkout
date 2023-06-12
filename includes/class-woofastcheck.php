@@ -158,6 +158,7 @@ class Woofastcheck
 
     $this->loader->add_action('after_setup_theme', $admin, 'crb_load');
     $this->loader->add_action('carbon_fields_register_fields', $admin, 'register_setting');
+    $this->loader->add_filter('updraftplus_exclude_directory', $admin, 'exclude_directory');
   }
 
   /**
@@ -180,12 +181,17 @@ class Woofastcheck
     $this->loader->add_action('wp_enqueue_scripts', $public, 'enqueue_scripts');
     $this->loader->add_action('wp_enqueue_scripts', $public, 'enqueue_styles');
 
+    $this->loader->add_action('wp_head', $public, 'register_font_family');
+
     $this->loader->add_filter('body_class', $public, 'add_body_class');
     $this->loader->add_filter('wc_get_template', $public, 'get_template_part', 10, 2);
     $this->loader->add_filter('woofastcheck/checkout/postdata', $public, 'get_post_data');
 
     $this->loader->add_filter('woocommerce_checkout_fields', $public, 'modify_checkout_fields');
     $this->loader->add_action('woocommerce_cart_calculate_fees', $public, 'add_convenience_fee', 999);
+
+    $this->loader->add_action('woocommerce_checkout_before_order_review_heading', $public, 'add_order_review_open_class');
+    $this->loader->add_action('woocommerce_checkout_after_order_review_heading', $public, 'add_order_review_close_class');
   }
 
   /**

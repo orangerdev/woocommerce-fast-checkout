@@ -171,6 +171,25 @@ class Front
   }
 
   /**
+   * Register font family via HTML code
+   * @uses    wp_head, priority 10, 1
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @return  void
+   */
+  public function register_font_family()
+  {
+
+    if ($this->has_shortcode) :
+?>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<?php
+    endif;
+  }
+
+  /**
    * Register shortcode
    * @uses    init, priority 10
    * @author  Ridwan Arifandi
@@ -222,11 +241,11 @@ class Front
 
         if (is_array($this->products) && count($this->products) > 0) :
 
-          $this->has_shortcode = true;
-
           \WC()->cart->add_to_cart($this->products[0]['id'], 1);
 
         endif;
+
+        $this->has_shortcode = true;
 
       endif;
     endif;
@@ -313,8 +332,13 @@ class Front
   public function get_template_part($template, $template_name)
   {
 
-    if ('checkout/payment.php' === $template_name) :
-      $template = WOOFASTCHECK_PLUGIN_DIR . 'public/partials/checkout/payment.php';
+    $overwrite_templates = [
+      'checkout/payment.php',
+      'checkout/form-billing.php',
+      'checkout/form-shipping.php'
+    ];
+    if (in_array($template_name, $overwrite_templates)) :
+      $template = \WOOFASTCHECK_PLUGIN_DIR . 'public/partials/' . $template_name;
     endif;
 
     return $template;
@@ -350,5 +374,15 @@ class Front
         endif;
       endforeach;
     endif;
+  }
+
+  public function add_order_review_open_class()
+  {
+    echo "<div class='woocommerce-order-review-holder'>";
+  }
+
+  public function add_order_review_close_class()
+  {
+    echo "</div>";
   }
 }

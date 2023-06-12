@@ -1,15 +1,34 @@
+body.woofastcheck {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+}
+
 .woofastcheck-holder {
   width: 640px;
   max-width: calc(100% - var(--wp--style--root--padding-left)) !important;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.3%;
 }
 @media screen and (max-width: 640px) {
   .woofastcheck-holder {
-    border-radius: 4px;
-    padding: 0.5rem;
+    letter-spacing: 0;
+  }
+}
+.woofastcheck-holder h2 {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -1.7%;
+  margin: 0 0 10px 0;
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-holder h2 {
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -1px;
   }
 }
 .woofastcheck-holder .button-nav {
@@ -28,6 +47,22 @@
     font-size: 0.5rem;
     border-radius: 0.125rem;
   }
+}
+.woofastcheck-holder button[type=submit] {
+  background-color: #1d1919;
+  -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.0784313725);
+          box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.0784313725);
+  color: white;
+  border-radius: 8px;
+  line-height: 12px;
+  padding: 10px 32px;
+  float: none;
+}
+.woofastcheck-holder button[type=submit]:hover {
+  background: #444242;
+}
+.woofastcheck-holder button[type=submit]:active {
+  background: #737171;
 }
 
 .woofastcheck-select-product label {
@@ -108,6 +143,26 @@
   text-align: right;
 }
 
+.woofastcheck-checkout-form .woocommerce .woocommerce-billing-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-shipping-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-additional-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-order-review-holder {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  -webkit-box-shadow: 0px 21px 54px rgba(0, 0, 0, 0.08);
+          box-shadow: 0px 21px 54px rgba(0, 0, 0, 0.08);
+}
+@media screen and (max-width: 640px) {
+  .woofastcheck-checkout-form .woocommerce .woocommerce-billing-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-shipping-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-additional-fields,
+.woofastcheck-checkout-form .woocommerce .woocommerce-order-review-holder {
+    -webkit-box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  }
+}
 .woofastcheck-checkout-form .col2-set {
   float: none !important;
   width: 100% !important;
@@ -133,28 +188,65 @@
 .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-billing-fields__field-wrapper {
   margin-top: 0;
 }
-@media screen and (max-width: 640px) {
-  .woofastcheck-checkout-form .woocommerce-checkout .form-row > label {
-    font-size: 14px;
-  }
+.woofastcheck-checkout-form .woocommerce-checkout .form-row {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row > label {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;
+  /* identical to box height, or 143% */
+  letter-spacing: -0.003em;
+  /* dark/500 */
+  color: #737171;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row > label .required {
+  color: red;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper {
+  display: block;
 }
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=text],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=email],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=tel],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=number],
-.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select {
-  border-radius: 4px;
-  border-width: 1px;
-  padding: 0.9em 1.1rem;
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper textarea {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 12px 16px;
+  height: 44px;
+  background: #efefef;
+  border: 1px solid #929090;
+  border-radius: 8px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=text]:focus,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=email]:focus,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=tel]:focus,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=number]:focus,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select:focus,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper textarea:focus {
+  background: #efefef;
+  border: 1px solid #1d1919;
+  border-radius: 8px;
+  outline: none;
 }
 @media screen and (max-width: 640px) {
   .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=text],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=email],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=tel],
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=number],
-.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select {
-    padding: 0.9em 0.55rem;
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper select,
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper textarea {
+    font-size: 16px;
   }
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper textarea {
+  height: 72px;
 }
 .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper input[type=radio] {
   float: left;
@@ -188,6 +280,105 @@
   .woofastcheck-checkout-form .woocommerce-checkout .form-row .woocommerce-input-wrapper label.checkbox {
     font-size: 12px;
   }
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder .woocommerce-input-wrapper {
+  position: relative;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder input:checked ~ .checkmark {
+  background-color: #1d1919;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder input:checked ~ .checkmark:after {
+  display: block;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border: 1.6px solid #929090;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: 1px solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.woofastcheck-checkout-form .woocommerce-checkout .form-row.checkbox-holder input ~ .checkmark {
+  background-color: transparent;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper {
+  display: block;
+  position: relative;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 12px 16px 12px 40px;
+  margin-bottom: 10px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper label {
+  cursor: pointer;
+  margin: 0;
+  font-size: 14px;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper input:checked ~ .checkmark {
+  background-color: #1d1919;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper input:checked ~ .checkmark:after {
+  display: block;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border: 1.6px solid #929090;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: 1px solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper input ~ .checkmark {
+  background-color: transparent;
+}
+.woofastcheck-checkout-form .woocommerce-checkout .radio-wrapper .checkmark {
+  top: 14px;
+  left: 16px;
 }
 @media screen and (max-width: 640px) {
   .woofastcheck-checkout-form .woocommerce-checkout .woocommerce-checkout-review-order {
