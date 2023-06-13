@@ -301,6 +301,34 @@ class Front
   }
 
   /**
+   * Validate checkout data
+   * @uses    woocommerce_checkout_process, priority 10, 1
+   * @author  Ridwan Arifandi
+   * @since   1.0.0
+   * @param   array     $post_data  Post data
+   * @param   WC_Error  $errors     Error object
+   * @return  void
+   */
+  public function validate_checkout_data($post_data, $errors)
+  {
+
+    print_r($post_data);
+    if (
+      isset($post_data['billing_confirm_email']) &&
+      $post_data['billing_email'] !== $post_data['billing_confirm_email']
+    ) :
+
+      $errors->add(
+        'billing_confirm_email_validation',
+        'Email address does not match',
+        array(
+          'id' => 'billing_confirm_email'
+        )
+      );
+    endif;
+  }
+
+  /**
    * Modify checkout fields
    * @uses    woocommerce_checkout_fields, priority 10
    * @author  Ridwan Arifandi
@@ -310,6 +338,18 @@ class Front
    */
   public function modify_checkout_fields(array $fields)
   {
+
+    $fields['billing']['billing_confirm_email'] = array(
+      'label'       => __('Confirm Email Address', 'woocommerce'),
+      'required'    => true,
+      'class'       => array('form-row-wide', 'form-row-last'),
+      'clear'       => true,
+      'type'        => 'email',
+      'priority'    => 111,
+    );
+
+    $fields['billing']['billing_email']['title'] = __("Email Address");
+    $fields['billing']['billing_email']['class'] = array('form-row-wide', 'form-row-first');
 
     $fields['billing']['selected_payment_gateway'] = array(
       'type' => 'hidden',

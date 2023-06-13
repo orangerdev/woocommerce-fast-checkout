@@ -158,7 +158,7 @@ class Woofastcheck
 
     $this->loader->add_action('after_setup_theme', $admin, 'crb_load');
     $this->loader->add_action('carbon_fields_register_fields', $admin, 'register_setting');
-    $this->loader->add_filter('updraftplus_exclude_directory', $admin, 'exclude_directory');
+    $this->loader->add_filter('updraftplus_exclude_directory', $admin, 'exclude_directory', 99, 2);
   }
 
   /**
@@ -186,6 +186,8 @@ class Woofastcheck
     $this->loader->add_filter('body_class', $public, 'add_body_class');
     $this->loader->add_filter('wc_get_template', $public, 'get_template_part', 10, 2);
     $this->loader->add_filter('woofastcheck/checkout/postdata', $public, 'get_post_data');
+
+    $this->loader->add_action('woocommerce_after_checkout_validation', $public, 'validate_checkout_data', 99, 2);
 
     $this->loader->add_filter('woocommerce_checkout_fields', $public, 'modify_checkout_fields');
     $this->loader->add_action('woocommerce_cart_calculate_fees', $public, 'add_convenience_fee', 999);

@@ -97,6 +97,13 @@
 				.wrapAll('<span class="radio-wrapper"></div>');
 		});
 
+		$("form .form-row-first").each(function () {
+			$(this)
+				.next(".form-row-last")
+				.andSelf()
+				.wrapAll('<div class="form-row-wrapper"></div>');
+		});
+
 		$("input[type='radio']").after("<span class='checkmark'></span>");
 
 		$(document.body).trigger("update_checkout");
