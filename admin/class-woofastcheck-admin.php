@@ -116,6 +116,13 @@ class Admin
   public function register_setting()
   {
     $this->main_options = Container::make('theme_options', __('eCom Config', 'docquity'))
+      ->add_tab(__('Email', 'docquity'), [
+        Field::make("rich_text", "completed_email_content", "Completed Email Content"),
+        Field::make('text', 'completed_email_url', 'Completed Email URL')
+          ->set_attribute('type', 'url')
+          ->set_attribute('placeholder', 'https://')
+          ->set_width(50)
+      ])
       ->add_tab(__('Payment Fee Setup', 'docquity'), [
 
         Field::make('complex', 'payment', __('Payment Channel', 'docquity'))
