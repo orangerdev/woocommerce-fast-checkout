@@ -340,7 +340,7 @@ class Front
   {
 
     $fields['billing']['billing_confirm_email'] = array(
-      'label'       => __('Confirm Email Address', 'woocommerce'),
+      'label'       => __('Re-Type Email Address', 'woocommerce'),
       'required'    => true,
       'class'       => array('form-row-wide', 'form-row-last'),
       'clear'       => true,

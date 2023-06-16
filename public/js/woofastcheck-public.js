@@ -106,6 +106,18 @@
 
 		$("input[type='radio']").after("<span class='checkmark'></span>");
 
+		$("#billing_email").on("paste", function (e) {
+			e.preventDefault();
+		});
+
+		$("#billing_confirm_email").on("paste", function (e) {
+			e.preventDefault();
+		});
+
+		$("#billing_confirm_email_field").append(
+			"<em class='field-description'><span>&#124;</span> Copy paste is not allowed in this field</em>"
+		);
+
 		$(document.body).trigger("update_checkout");
 	});
 })(jQuery);
