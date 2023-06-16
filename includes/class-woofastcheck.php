@@ -157,7 +157,8 @@ class Woofastcheck
     $admin = new Woofastcheck\Admin($this->get_plugin_name(), $this->get_version());
 
     $this->loader->add_action('after_setup_theme', $admin, 'crb_load');
-    $this->loader->add_action('carbon_fields_register_fields', $admin, 'register_setting');
+    $this->loader->add_action('carbon_fields_register_fields', $admin, 'register_setting', -1);
+    $this->loader->add_filter('woofastcheck/main-options', $admin, 'get_main_options', 999999999);
     $this->loader->add_filter('updraftplus_exclude_directory', $admin, 'exclude_directory', 99, 2);
   }
 

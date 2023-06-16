@@ -409,6 +409,8 @@ class Front
             $fee = $cart->subtotal * $fee / 100;
           endif;
 
+          $fee = apply_filters('woofastcheck/convenience-fee', $fee, $payment, $cart);
+
           $cart->add_fee('Transaction Fee', $fee, true);
           break;
         endif;

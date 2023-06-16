@@ -108,7 +108,7 @@ class Admin
 
   /**
    * Register carbonfields setting
-   * @uses    carbon_fields_register_fields, priority 10
+   * @uses    carbon_fields_register_fields, priority -1
    * @author  Ridwan Arifandi
    * @since   1.0.0
    * @return  void
@@ -186,6 +186,17 @@ class Admin
       ->add_fields(
         apply_filters("woofastcheck/product/settings", $fields)
       );
+  }
+
+  /**
+   * Get carbon fields main options
+   * @uses  woofastcheck/main-options, priority 999999999
+   * @since   1.0.0
+   * @return  Carbon_Fields\Container
+   */
+  public function get_main_options()
+  {
+    return $this->main_options;
   }
 
   /**
